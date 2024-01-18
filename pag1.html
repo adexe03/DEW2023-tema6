@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 1 - Pag1</title>
+</head>
+
+<body>
+  <h1>Pruebas con localStorage</h1>
+  <p>
+    <input type="text" name="name" placeholder="Escribe tu nombre">
+    <input type="number" name="age" placeholder="Edad?">
+    <input type="submit" value="guardar" onclick="saveData()">
+  </p>
+  <p>
+    <a href="pag2.html">Ir a página 2 para ver los datos almacenados</a>
+  </p>
+  <script>
+    function saveData() {
+      localStorage.setItem('name', document.getElementsByName('name')[0].value);
+      localStorage.setItem('age', document.getElementsByName('age')[0].value);
+    }
+  </script>
+</body>
+
+</html>

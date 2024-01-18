@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 3</title>
+</head>
+
+<body>
+  <h1>Ejercicio 3 - Almacenar lista de tareas</h1>
+  <p>
+    <input type="text" name="task" id="task">
+    <input type="submit" value="crear" onclick="createTask()">
+  </p>
+  <h2>Lista de tareas</h2>
+  <ul id="tasks"></ul>
+  <script>
+    const inputTask = document.getElementById('task');
+    const tasks = document.getElementById('tasks');
+
+    function createTask() {
+      const li = document.createElement('li');
+      li.textContent = inputTask.value;
+      tasks.append(li);
+      inputTask.value = '';
+      inputTask.focus();
+      saveData();
+    }
+
+    function saveData() {
+      let listLiTasks = tasks.querySelectorAll('li');
+      let listTextTasks = [...listLiTasks].map(task => task.textContent);
+      localStorage.tasks = JSON.stringify(listTextTasks);
+    }
+
+    function loadData() {
+      if (localStorage.tasks) {
+        let tasksText = JSON.parse(localStorage.tasks);
+        tasksText.forEach(task => {
+          const li = document.createElement('li');
+          li.textContent = task;
+          tasks.append(li);
+        });
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+
+</html>

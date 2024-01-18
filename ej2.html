@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 2</title>
+</head>
+
+<body>
+  <p>
+    Color:
+    <input type="color" name="color" id="color" onchange="changeText()">
+  </p>
+  <p>
+    Tamaño:
+    <input type="range" name="size" id="size" min="8" max="30" onchange="changeText()">
+  </p>
+  <p>
+    <input type="submit" value="guardar" onclick="saveFormat()">
+  </p>
+  <p id="text">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ducimus, at iste aliquam laudantium ipsa
+    ipsam itaque quia, nostrum tempora deleniti eos temporibus quibusdam dolorum unde. Beatae quod autem ad.
+  </p>
+  <script>
+    const inputColor = document.getElementById('color');
+    const inputSize = document.getElementById('size');
+    const inputText = document.getElementById('text');
+
+    function changeText() {
+      inputText.style.color = inputColor.value;
+      inputText.style.fontSize = inputSize.value + 'px';
+    }
+
+    function saveFormat() {
+      localStorage.color = inputColor.value;
+      localStorage.size = inputSize.value;
+    }
+
+    window.onload = () => {
+      if (localStorage.color && localStorage.size) {
+        inputColor.value = localStorage.color;
+        inputSize.value = localStorage.size;
+      }
+      changeText();
+    };
+  </script>
+</body>
+
+</html>
