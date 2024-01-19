@@ -5,10 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ejercicio 3</title>
+  <style>
+    .hide {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
   <h1>Ejercicio 3 - Almacenar lista de tareas</h1>
+  <p>
+    Filtro:
+    <input type="text" name="search" id="search" onkeyup="searchTasks()">
+  </p>
   <p>
     <input type="text" name="task" id="task">
     <input type="submit" value="crear" onclick="createTask()">
@@ -21,6 +30,18 @@
   <script>
     const inputTask = document.getElementById('task');
     const tasks = document.getElementById('tasks');
+    const search = document.getElementById('search');
+
+    function searchTasks() {
+      let listLiTAsks = tasks.querySelectorAll('li');
+      listLiTasks.forEach(task => {
+        if (task.textContent.includes(search.value)) {
+          task.classList.remove('hide');
+        } else {
+          task.classList.add("hide");
+        }
+      })
+    }
 
     inputTask.addEventListener('keypress', e => {
       if (e.key == 'Enter') {
