@@ -13,16 +13,42 @@
     <input type="text" name="task" id="task">
     <input type="submit" value="crear" onclick="createTask()">
   </p>
+  <p>
+    <button onclick="deleteTasks()">Borrar tareas</button>
+  </p>
   <h2>Lista de tareas</h2>
   <ul id="tasks"></ul>
   <script>
     const inputTask = document.getElementById('task');
     const tasks = document.getElementById('tasks');
 
-    function createTask() {
+    inputTask.addEventListener('keypress', e => {
+      if (e.key == 'Enter') {
+        createTask();
+      }
+    });
+
+    function deleteTasks() {
+      tasks.innerHTML = '';
+      // PRIMERA FORMA DE ELIMINAR
+      // localStorage.removeItem('tasks');
+      // SEGUNDA FORMA DE ELIMINAR
+      // saveData();
+      // TERCERA FORMA DE ELIMINAR
+      // localStorage.tasks = [];
+      // CUARTA FORMA DE ELIMINAR
+      delete localStorage.tasks
+    }
+
+    function insertTaskLi(task) {
       const li = document.createElement('li');
-      li.textContent = inputTask.value;
+      li.textContent = task;
+      li.addEventListener('click', deleteTask)
       tasks.append(li);
+    }
+
+    function createTask() {
+      insertTaskLi(inputTask.value);
       inputTask.value = '';
       inputTask.focus();
       saveData();
@@ -38,11 +64,14 @@
       if (localStorage.tasks) {
         let tasksText = JSON.parse(localStorage.tasks);
         tasksText.forEach(task => {
-          const li = document.createElement('li');
-          li.textContent = task;
-          tasks.append(li);
+          insertTaskLi(task);
         });
       }
+    }
+
+    function deleteTask(e) {
+      e.target.remove();
+      saveData();
     }
 
     loadData();
