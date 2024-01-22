@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=ç, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Prueba de geolocalización</h1>
+
+  <p>Latitud: <span id="lat">--</span></p>
+  <p>Longitud: <span id="lon">--</span></p>
+  <p>
+    <button onclick="getPosition()">Obtener posición</button>
+  </p>
+  <iframe width="800" height="600" id="map"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=1.521139740943909%2C42.50828350739807%2C1.5298783779144287%2C42.51177922286313&amp;layer=mapnik"
+    style="border: 1px solid black"></iframe>
+  <script>
+    function getPosition() {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        let lon = position.coords.longitude;
+        let lat = position.coords.latitude;
+        document.getElementById("lat").textContent = lat;
+        document.getElementById("lon").textContent = lon;
+        let zoom = 0.01;
+        let lonIni = lon - zoom;
+        let lonFin = lon + zoom;
+        let latIni = lat - zoom;
+        let latFin = lat + zoom;
+        let url = `https://www.openstreetmap.org/export/embed.html?bbox=${lonIni},${latIni},${lonFin},${latFin}&layer=mapnik`;
+        document.getElementById('map').src = url;
+
+      });
+    }
+  </script>
+</body>
+
+</html>
