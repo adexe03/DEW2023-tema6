@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #myCanvas {
+      border: 1px solid black;
+      box-shadow: 5px 5px 5px gray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Pruebas con canvas</h1>
+  <canvas id="myCanvas" width="600" height="400"></canvas>
+  <script>
+    const myCanvas = document.getElementById('myCanvas');
+    let ctx = myCanvas.getContext("2d");
+
+    ctx.fillStyle = "rgb(200,0,0)";
+    ctx.fillRect(10, 10, 200, 100)
+
+    ctx.fillStyle = "rgb(100,100,255)";
+    ctx.fillRect(150, 80, 100, 200);
+
+    ctx.strokeRect(300, 300, 50, 50);
+
+    ctx.beginPath();
+    ctx.moveTo(580, 380);
+    ctx.lineTo(580, 180);
+    ctx.lineTo(480, 180);
+    ctx.lineTo(480, 100);
+    ctx.lineTo(380, 70);
+    ctx.fill();
+  </script>
+</body>
+
+</html>

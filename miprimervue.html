@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    .alert {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Mi primer VUE</h1>
+
+  <div id="app">
+    <p :style="styleMessage" v-text="message" @click="hello"></p>
+    <p>fondo: <input type="color" v-model="styleMessage.backgroundColor"></p>
+    <p>color: <input type="color" v-model="styleMessage.color"></p>
+    <p>tamaño: <input type="range" min="8" max="40" v-model="styleMessage.fontSize"></p>
+    <p :class="classMessage">{{message}}</p>
+    <p>Añadir clase: <input type="text" v-model="classMessage"></p>
+    <h1>{{count}}</h1>
+    <button @click="count++">{{count}}</button>
+    <p v-html="content"></p>
+    <p>
+      <input type="text" v-model.lazy="message">
+    </p>
+    <p>
+      <select name="" v-model="module">
+        <option value="DSW">Desarrollo lado servidor</option>
+        <option value="DEW">Desarrollo lado cliente</option>
+        <option value="DOR">Diseño de interfaces</option>
+      </select>
+    </p>
+    <p>Has elegido el módulo: {{module}}</p>
+    <p>Es vip: <input type="checkbox" v-model="vip"></p>
+    <p v-show="vip">Eres una persona importante</p>
+    <p v-show="!vip">Eres una persona cutre</p>
+    <p>Edad: <input type="number" v-model="edad"></p>
+    <template v-if="edad >= 18">
+      <p>Mayor de edad</p>
+      <h1>Algo</h1>
+    </template>
+    <p v-else>Eres menor de edad</p>
+    <ul>
+      <li v-for="(color, index) in colors" :key="index">{{index}} - {{color}}</li>
+    </ul>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      data() {
+        return {
+          message: 'Esto es otro mensaje',
+          count: 0,
+          content: 'Esto es <strong>negrita</strong> y esto no.',
+          module: 'DEW',
+          vip: false,
+          edad: 0,
+          colors: ['red', 'blue', 'green', 'pink', 'purple', 'yellow'],
+          classMessage: '',
+          styleMessage: {
+            'background-color': 'yellow',
+            'color': 'navy',
+            'font-size': '23px'
+          },
+        }
+      },
+      methods: {
+        hello() {
+          console.log('hola');
+        },
+      }
+    }).mount('#app')
+  </script>
+
+</body>
+
+</html>
